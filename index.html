@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,height=device-height,intial-scale=1.0,user-scalable=yes">
+		<title>Techrarrium</title>
+		
+		<link rel=icon" type="image/png" href="">
+		<link rel="stylesheet" type="text/css" href="interface.css">
+	</head>
+	
+	<body>
+	<div id="game" style="display:block;">
+		<!-- Counters for 3 main currencies -->
+		<div id="counters">
+			<h1 style="text-shadow:0 0 16px #F00;">Copper: <span id="copperTotal" class="totalValue">0<span> </h1>
+			<h1 style="text-shadow:0 0 16px #0F0;">DNA: <span id="dnaTotal" class="totalValue">0<span> </h1>
+			<h1 style="text-shadow:0 0 16px #00F;">Mutanium: <span id="mutaTotal" class="totalValue">0<span> </h1>
+		</div>
+		
+		<!-- Story/progress message -->
+		<p class="miscText" id="storyText" style="font-size:16px;">"Your study into a mechanical terrarium begins."</p>
+		
+		<br>
+		<!-- Increment Buttons -->
+			<!-- Copper -->
+		<p style="font-weight:normal;" class="redText"> Ore Size: 
+			<span id="copperOreSize" class="redText">1</span> 
+			<button onClick="copperIncrease()">Mine Copper</button>
+			(<span id="copperPerSec">0</span> per/sec)
+		</p>
+			<!-- DNA -->
+		<p style="font-weight:normal;" class="greenText">DNA Mitosis Rate (MR):
+			<span id="dnaMR" class="greenText">5</span> 
+		</p>
+			<!-- Mutanium -->
+		<p style="font-weight:normal;" class="blueText">Mutanium Synthesis: 
+			<progress id="mutaBar" value="100" max="1000"></progress>
+			<span class="blueText" id="mutaBarValue">0</span> / 1000 
+			<span class="miscText">(+<span id="mutaPS" class="blueText">100</span> per/sec) </span>
+		</p>
+		<p class="miscText"><button onClick="mutaIncrease()">Produce Mutanium</button> (-3 Copper, -10 DNA)</p>
+		<br> 
+		
+		<!-- Different Tabs -->
+		<button class="menuButton" onClick="switchTabs('creaturetab')">Organisms</button>
+		<button class="menuButton" onClick="switchTabs('upgradetab')">Upgrades</button>
+		<br>
+		
+		<!-- Buildings -->
+		<div id="creaturetab" style="display:block;">
+			<table align="center">
+				<!-- ID B0: Bionic Bushcrawler -->
+				<tr>
+					<td>
+						<span class="creatureName">Bionic Bushcrawler</span> <br>
+						
+						+2 <span class="redText">Copper</span>/<span class="greenText">DNA</span>
+						<span class="miscText">(per/sec)</span> <br>
+						
+						<span class="miscText">"An efficient but lightweight creature, the bush on it's back provides energy to the harvesting part that mines copper."</span> <br><br>
+						
+						<button onClick="buyBuilding(0,1.3)">Cost: <span id="B0Cost">3</span> Mutanium <br></button>
+						Bought: <span id="B0Bought">0</span>
+					</td>
+				</tr>
+				<!-- ID B1: Artificial Mutacell -->
+				<tr>
+					<td>
+						<span class="creatureName">Artificial Mutacell</span> <br>
+						
+						+4 <span class="blueText">Mutanium-Rate</span> <br>
+						
+						<span class="miscText">"A unique colony species, made of millions of independent cells that join together into their natural forms. They can assist your mutanium production."</span> <br><br>
+						
+						<button onClick="buyBuilding(1,1.7)">Cost: <span id="B1Cost">5</span> Copper <br></button>
+						Bought: <span id="B1Bought">0</span>
+					</td>
+				</tr>
+				<!-- ID B2: Synthesis Lichen -->
+				<tr>
+					<td>
+						<span class="creatureName">Synthesis Lichen</span> <br>
+						
+						+10 <span class="greenText">DNA MR</span> <br>
+						
+						<span class="miscText">"One of the most busy species in the terrarium, constantly multiplying itself and producing extra DNA for you to use."</span> <br><br>
+						
+						<button onClick="buyBuilding(2,2)">Cost: <span id="B2Cost">40</span> DNA <br></button>
+						Bought: <span id="B2Bought">0</span>
+					</td>
+				</tr>
+			</table>
+		</div>
+		
+		<!-- Upgrades -->
+		<div id="upgradetab" style="display:none;">
+			<table align="center">
+				<!-- Upgrade 0.0 to 0.2 -->
+				<tr>
+					<!-- ID U0.0: Electrical Stimulus -->
+					<td>
+						<button class="upgradeButton" id="upgrade0" onClick="purchaseUpgrade(0)">
+						<span style="font-weight:bold;">Electrical Stimulus</span>
+						<br>+5 DNA MR
+						<br><span class="miscText">Cost: 100 Copper</span>
+						</button>
+						
+						<button class="upgradeButton" id="upgrade0B"> 
+						<span style="text-shadow:0 0 3px #F0F;">Bought!</span> 
+						</button>
+					</td>
+					
+					<!-- ID U0.1: Efficient Reactions -->
+					<td>
+						<button class="upgradeButton" id="upgrade1" onClick="purchaseUpgrade(1)">
+						<span style="font-weight:bold;">Efficient Reactions</span>
+						<br>+40 Mutanium per/sec
+						<br><span class="miscText">Cost: 400 DNA</span>
+						</button>
+						
+						<button class="upgradeButton" id="upgrade1B"> 
+						<span style="text-shadow:0 0 3px #F0F;">Bought!</span> 
+						</button>
+					</td>
+					
+					<!-- ID U0.2: Basic Bioleaching -->
+					<td>
+						<button class="upgradeButton" id="upgrade2" onClick="purchaseUpgrade(2)">
+						<span style="font-weight:bold;">Basic Bioleaching</span>
+						<br>+2 Copper ore size
+						<br><span class="miscText">Cost: 24 Mutanium</span>
+						</button>
+						
+						<button class="upgradeButton" id="upgrade2B"> 
+						<span style="text-shadow:0 0 3px #F0F;">Bought!</span> 
+						</button>
+					</td>
+				</tr>
+				<br>
+				<!-- Upgrades 1.0 to 1.2 -->
+				<tr>
+					<!-- ID U1.0: Mutanium Salt -->
+					<td>
+						<button class="upgradeButton" id="upgrade3" onClick="purchaseUpgrade(3)">
+						<span style="font-weight:bold;">Mutanium Salt</span>
+						<br>+1 Copper ore size per 4 Mutanium
+						<br><span class="miscText">Cost: 100 Mutanium, 100 Copper</span>
+						</button>
+						
+						<button class="upgradeButton" id="upgrade3B"> 
+						<span style="text-shadow:0 0 3px #F0F;">Bought!</span> 
+						</button>
+					</td>
+					<!-- ID U1.1: Sentient Copper -->
+					<td>
+						<button class="upgradeButton" id="upgrade4" onClick="purchaseUpgrade(4)">
+						<span style="font-weight:bold;">Sentient Copper</span>
+						<br>DNA MR multiplies based on Copper total.
+						<br><span class="miscText">Cost: 200 Mutanium, 2000 Copper</span>
+						</button>
+						
+						<button class="upgradeButton" id="upgrade4B"> 
+						<span style="text-shadow:0 0 3px #F0F;">Bought!</span> 
+						</button>
+					</td>
+					<!-- ID U1.2: True Sentience -->
+					<td>
+						<button class="upgradeButton" id="upgrade5" onClick="purchaseUpgrade(5)">
+						<span style="font-weight:bold;text-shadow:0 0 3px #F0F;">True Sentience</span>
+						<br>Achieve true sentience, and complete the terrarium.
+						<br><span class="miscText">Cost: 6k <span class="redText">Copper</span>, 50k <span class="greenText">DNA</span>, 300 <span class="blueText">Mutanium</span></span>
+						</button>
+						
+						<button class="upgradeButton" id="upgrade5B"> 
+						<span style="text-shadow:0 0 3px #F0F;">Bought!</span> 
+						</button>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	
+	<!-- Game Completion -->
+	<div id="finishGame" style="display:none;">
+		<h1 style="padding-top:20%;">You win :)</h1>
+	</div>
+		
+		<!-- JAVASCRIPT -->
+		<script type="text/javascript" src="main.js"></script>
+		<script type="text/javascript" src="story.js"></script>
+		<script type="text/javascript" src="upgrade/check_upgrade.js"></script>
+		<script type="text/javascript" src="upgrade/buy_upgrade.js"></script>
+		<script type="text/javascript" src="upgrade/upgrade.js"></script>
+		<script type="text/javascript" src="upgrade/upgrade_active.js"></script>
+		<script type="text/javascript" src="buildings.js"></script>
+	</body>
+</html>

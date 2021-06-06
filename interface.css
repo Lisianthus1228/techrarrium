@@ -1,0 +1,79 @@
+body{
+	background-color: #282828;
+	font-family: Courier New;
+	color: #ffffff;
+	text-align: center;
+	font-size: 18px;
+}
+#counters{
+	font-style: italic;
+	color:#ffffff;
+}
+.totalValue{
+	font-size:40px;
+	text-shadow: 0 0 6px #fff;
+}
+
+/* Default button layout */
+button{
+	color:#ffffff;
+	background-color:#585858;
+	padding: 5px 12px;
+	
+	outline: none;
+	border-radius: 4px;
+}
+
+/* Creature tab bordering and styling */
+#creaturetab{
+	text-align:justify;
+}
+div#creaturetab td{
+	width: 700px;
+	height: 160px;
+	
+	border-collapse:separate;
+	border-radius: 20px;
+	border: 1px solid #383838;
+	padding: 0 8px;
+	background: #383838;
+}
+div#creaturetab table, th{ /*Creates space between rows*/
+	border-spacing:0 20px;
+}
+.creatureName{
+	text-shadow:0 0 2px #ffd700;
+	font-weight: bold;
+}
+
+/* Specific button styles */
+.menuButton{
+	padding: 9px 27px;
+	text-shadow:0 0 16px #7F00FF;
+	font-weight: bold;
+}
+.upgradeButton{
+	display: none;
+	padding: 24px 40px;
+	width: 240px;
+	height: 150px;
+}
+
+/* Specific text styling. */
+.miscText{
+	color:#aaaaaa;
+	font-size:15px;
+	font-style:italic;
+}
+.redText{
+	text-shadow:0 0 4px #F00;
+	font-weight:bold;
+}
+.greenText{
+	text-shadow:0 0 4px #0F0;
+	font-weight:bold;
+}
+.blueText{
+	text-shadow:0 0 4px #00F;
+	font-weight:bold;
+}
