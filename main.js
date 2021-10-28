@@ -44,10 +44,11 @@ function dnaMultiplier(){
 	return dnaMRB;
 }
 function mutaProgMultiplier(){
-	mutaPSB = Math.floor((mutaPS+(buildings[1]*4))*(sentientBonus-0.3));
+	mutaPSB = Math.floor(mutaPS*(sentientBonus-0.3));
 	if (mutaPSB <= 100){
 		mutaPSB = 100;
 	}
+        mutaPSB += buildings[1] * 4; // Bonus from mutanium building.
 	return mutaPSB;
 }
 
