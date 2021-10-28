@@ -15,7 +15,6 @@ function buyBuilding(value,priceMultiplier){
 		case 1:
 			if(copperTotal >= price){
 				copperTotal -= price;
-				mutaPS += 4;
 				buildings[value] += 1;
 			}
 			break;
